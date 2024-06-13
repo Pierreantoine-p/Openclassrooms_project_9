@@ -1,4 +1,4 @@
-package utils;
+package com.medilabo_solutions.medilabo.utils;
 
 public class EntityNotFoundException extends RuntimeException{
 
