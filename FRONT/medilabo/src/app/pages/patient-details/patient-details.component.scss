@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligner les composants à gauche */
+}
+
+app-patient-details {
+  align-self: flex-start; /* Positionner patient-details en haut à gauche */
+}
+
+app-notes-patient {
+  align-self: flex-end; /* Positionner notes-patient en bas */
+  margin-top: auto; /* Assurer qu'il est collé en bas */
+}
+
+app-status-patient {
+  align-self: flex-end; /* Positionner status-patient en haut à droite */
+}

@@ -1,0 +1,29 @@
+<div class="form-update-patient">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Prénom:</label>
+      <span>{{ user?.firstName }}</span>
+    </div>
+    <div>
+      <label>Nom:</label>
+      <span>{{ user?.lastName }}</span>
+    </div>
+    <div>
+      <label>Date de naissance:</label>
+      <span>{{ user?.birthDate }}</span>
+    </div>
+    <div>
+      <label>Genre:</label>
+      <span>{{ user?.gender }}</span>
+    </div>
+    <div>
+      <label for="address">Adresse:</label>
+      <input id="address" formControlName="address">
+    </div>
+    <div>
+      <label for="phoneNumber">Téléphone:</label>
+      <input id="phoneNumber" formControlName="phoneNumber">
+    </div>
+    <button type="submit" [disabled]="updateForm.invalid">Mettre à jour</button>
+  </form>
+</div>

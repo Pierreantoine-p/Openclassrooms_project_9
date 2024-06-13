@@ -1,0 +1,12 @@
+<div class="notes-patient">
+  <h2>Notes</h2>
+  <div *ngFor="let note of notes" class="note">
+    <div class="note-header">
+      <span class="note-patient">Patient: {{ note.patient }}</span>
+    </div>
+    <div class="note-content">
+      <p>{{ note.note }}</p>
+    </div>
+  </div>
+  <button (click)="redirectToAddNote()">Ajouter une note</button>
+</div>

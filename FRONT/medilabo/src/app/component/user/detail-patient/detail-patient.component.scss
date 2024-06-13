@@ -1,0 +1,19 @@
+.detail-patient {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.label {
+  width: 150px;
+  font-weight: bold;
+}
+
+.value {
+  flex: 1;
+}

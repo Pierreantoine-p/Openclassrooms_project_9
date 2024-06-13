@@ -1,0 +1,33 @@
+<div class="create-user">
+  <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="firstName">Prénom:</label>
+      <input id="firstName" formControlName="firstName">
+    </div>
+    <div>
+      <label for="lastName">Nom:</label>
+      <input id="lastName" formControlName="lastName">
+    </div>
+    <div>
+      <label for="birthDate">Date de naissance:</label>
+      <input id="birthDate" formControlName="birthDate" type="date">
+    </div>
+    <div>
+      <label for="gender">Genre:</label>
+      <select id="gender" formControlName="gender">
+        <option value="Male">Homme</option>
+        <option value="Female">Femme</option>
+        <option value="Other">Autre</option>
+      </select>
+    </div>
+    <div>
+      <label for="address">Adresse:</label>
+      <input id="address" formControlName="address">
+    </div>
+    <div>
+      <label for="phoneNumber">Téléphone:</label>
+      <input id="phoneNumber" formControlName="phoneNumber">
+    </div>
+    <button type="submit" [disabled]="createUserForm.invalid">Créer</button>
+  </form>
+</div>

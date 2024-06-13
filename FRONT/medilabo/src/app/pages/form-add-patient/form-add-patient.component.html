@@ -1,0 +1,34 @@
+<div class="container">
+  <h2>Add New Patient</h2>
+  <form (ngSubmit)="addUser()" #userForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="newUser.firstName" name="firstName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="newUser.lastName" name="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input type="date" class="form-control" id="birthDate" [(ngModel)]="newUser.birthDate" name="birthDate" required>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select class="form-control" id="gender" [(ngModel)]="newUser.gender" name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea class="form-control" id="address" [(ngModel)]="newUser.address" name="address" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="tel" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber" name="phoneNumber" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Patient</button>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+</div>

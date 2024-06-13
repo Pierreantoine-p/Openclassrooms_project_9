@@ -1,0 +1,10 @@
+<div>
+  <h1>Ajouter une note</h1>
+  <form (ngSubmit)="addNote()">
+    <div>
+      <label for="note">Note</label>
+      <textarea id="note" [(ngModel)]="newNote.note" name="note" required></textarea>
+    </div>
+    <button type="submit">Ajouter</button>
+  </form>
+</div>

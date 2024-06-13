@@ -1,0 +1,34 @@
+.notes-patient {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.note {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+
+  .note-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+  }
+
+  .note-content {
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+
+  .note-patid, .note-patient {
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .note:last-child {
+    border-bottom: none;
+  }
+}
