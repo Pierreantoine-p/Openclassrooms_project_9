@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
     standalone: true,
     templateUrl: './patient-details.component.html',
     styleUrl: './patient-details.component.scss',
-    imports: [NotesPatientComponent, StatusPatientComponent]
+    imports: []
 })
 export class PatientDetailsComponent{
 

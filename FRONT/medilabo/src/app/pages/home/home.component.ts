@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PatientFormComponent } from '../patient-form/patient-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,5 +10,10 @@ import { PatientFormComponent } from '../patient-form/patient-form.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  constructor(private router : Router) {}
 
+  redirectToAddPatient(){
+    this.router.navigate(['/form-add-patient']);
+
+  }
 }

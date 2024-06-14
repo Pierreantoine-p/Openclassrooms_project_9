@@ -1,10 +1,10 @@
-<div>
-  <h1>Ajouter une note</h1>
-  <form (ngSubmit)="addNote()">
-    <div>
-      <label for="note">Note</label>
-      <textarea id="note" [(ngModel)]="newNote.note" name="note" required></textarea>
+<div class="note-form-container">
+  <h2>Ajouter une Note</h2>
+  <form [formGroup]="createNoteForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="note">Note:</label>
+      <textarea id="note" formControlName="note" class="form-control"></textarea>
     </div>
-    <button type="submit">Ajouter</button>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
   </form>
 </div>

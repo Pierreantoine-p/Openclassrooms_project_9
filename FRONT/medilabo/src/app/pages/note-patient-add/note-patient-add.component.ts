@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NoteService } from '../../service/note.service';
 import { Router } from '@angular/router';
 import { Note } from '../../models/note.model';
@@ -9,7 +9,7 @@ import { UserService } from '../../service/user.service';
 @Component({
   selector: 'app-note-patient-add',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './note-patient-add.component.html',
   styleUrl: './note-patient-add.component.scss'
 })

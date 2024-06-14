@@ -1,0 +1,44 @@
+services:
+  front:
+    build:
+      context: ./front/medilabo
+      dockerfile: Dockerfile
+    container_name: front
+    ports:
+      - "4200:4200"
+
+  gateway:
+    build:
+      context: ./gateway/gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - medilabo
+      - note
+      - report
+
+  medilabo:
+    build:
+      context: ./medilabo
+      dockerfile: Dockerfile
+    container_name: medilabo
+    ports:
+      - "7070:7070"
+
+  note:
+    build:
+      context: ./note/note
+      dockerfile: Dockerfile
+    container_name: note
+    ports:
+      - "6060:6060"
+
+  report:
+    build:
+      context: ./report/report
+      dockerfile: Dockerfile
+    container_name: report
+    ports:
+      - "5050:5050"

@@ -1,6 +1,22 @@
 .home-container {
   display: flex;
+  flex-direction: column; /* Ajouté pour empiler les éléments verticalement */
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.redirect-button {
+  margin-top: 20px; /* Ajout d'un espace au-dessus du bouton */
+  padding: 10px 20px;
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  text-decoration: none; /* Suppression du soulignement du lien */
+  border-radius: 5px; /* Bords arrondis */
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3; /* Couleur de fond au survol */
+  }
 }

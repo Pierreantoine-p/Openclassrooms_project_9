@@ -21,6 +21,7 @@ export class NotesPatientComponent implements OnInit{
 
   ngOnInit(): void {
     this.userId = this.userService.getUser()?.id ?? null;
+    console.log("userId " + this.userId)
         if(this.userId){
       this.noteService.getNotes(this.userId).subscribe(
         (data : Note[]) => {
@@ -29,7 +30,7 @@ export class NotesPatientComponent implements OnInit{
         (error) => {
           console.error('Error fetching notes:', error);
         }
-      )
+      );
     }
   }
   redirectToAddNote() {
