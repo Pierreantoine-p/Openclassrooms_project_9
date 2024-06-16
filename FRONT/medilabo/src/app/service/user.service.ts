@@ -4,6 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from "../models/user.model";
 import { AuthService } from "./auth.service";
+import { ApiUrlService } from "./api-url.service";
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,11 @@ import { AuthService } from "./auth.service";
 
 export class UserService {
   user : User | null = null;
-  private apiUrl = 'http://localhost:8080/'
+  private apiUrl = '/api'
   private authService = inject(AuthService);
   private http = inject(HttpClient);
+  private apiUrlService = inject(ApiUrlService);
+  //private apiUrl: string = environment.apiUrl;
 
   constructor(private injector: Injector) { }
 
@@ -27,7 +31,10 @@ export class UserService {
 
 
   getUserByName(firstName : string, lastName : string): Observable<any>{
-    const url = `${this.apiUrl}user/${firstName}/${lastName}`;
+    //const url = `${this.apiUrl}/${firstName}/${lastName}`;
+    const url = this.apiUrlService.getUrl(`/${firstName}/${lastName}`);
+    console.log('Request URL:', this.apiUrl);
+    console.log('Request URL:', url);
     const headers = this.authService.createAuthHeaders()
     return this.http.get(url, {headers}).pipe(
       catchError(this.handleError)

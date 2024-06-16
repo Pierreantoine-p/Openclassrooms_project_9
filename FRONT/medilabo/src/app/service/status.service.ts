@@ -10,7 +10,7 @@ import { AuthService } from "./auth.service";
 
 export class StatusService {
 
-  private apiUrl = 'http://localhost:8080/report/'
+  private apiUrl = ''
   private authService = inject(AuthService);
   private http = inject(HttpClient);
 
@@ -18,7 +18,7 @@ export class StatusService {
 
 
 getStatus(firstName : String, lastName : String){
-  const url = `${this.apiUrl}?firstName=${firstName}/lastName=${lastName}`;
+  const url = `${this.apiUrl}report?firstName=${firstName}/lastName=${lastName}`;
   const headers = this.authService.createAuthHeaders()
   return this.http.get(url, {headers}).pipe(
     catchError(this.handleError)

@@ -13,7 +13,7 @@ import { AuthService } from "./auth.service";
 
 export class NoteService {
 
-  private apiUrl = 'http://localhost:8080/notes'
+  private apiUrl = ''
   private authService = inject(AuthService);
   private http = inject(HttpClient);
 
@@ -21,7 +21,7 @@ export class NoteService {
 
 
   getNotes(id :number): Observable<Note[]>{
-    const url = `${this.apiUrl}?id=${id}`;
+    const url = `${this.apiUrl}notes?id=${id}`;
     const headers = this.authService.createAuthHeaders();
     return this.http.get<Note[]>(url, {headers}).pipe(
       catchError(this.handleError)
