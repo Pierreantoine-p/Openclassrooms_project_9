@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class BaseUrlInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const apiReq = req.clone({ url: `http://localhost:8080${req.url}` });
+    const apiReq = req.clone({ url: `http://localhost:9090${req.url}` });
     return next.handle(apiReq);
   }
 }

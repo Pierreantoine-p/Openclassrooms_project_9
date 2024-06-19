@@ -11,5 +11,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     imports: [RouterOutlet, HeaderComponent]
 })
 export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
 
 }
