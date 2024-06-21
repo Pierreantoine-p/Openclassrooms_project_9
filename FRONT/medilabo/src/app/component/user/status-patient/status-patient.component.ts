@@ -11,7 +11,7 @@ import { StatusService } from '../../../service/status.service';
 })
 export class StatusPatientComponent implements OnInit{
 
-  status : string = '';
+  status: string = 'NONE';
   firstName: string = '';
   lastName: string = '';
   errorMessage: string = '';
@@ -48,7 +48,7 @@ export class StatusPatientComponent implements OnInit{
       case 'EARLYONSET':
         return 'red';
       default:
-        return 'gray'; // Couleur par défaut si le statut n'est pas reconnu
+        return 'green';
     }
   }
 }

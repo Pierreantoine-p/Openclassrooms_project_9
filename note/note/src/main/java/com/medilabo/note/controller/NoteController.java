@@ -31,10 +31,11 @@ public class NoteController {
 	private NoteService noteService;
 	
 	@PostMapping("/add")
-	public ResponseEntity<HttpStatus> save (@Valid @RequestBody Note note){
+	public ResponseEntity<Note> save (@Valid @RequestBody Note note){
 		try {
+			System.out.println("note : " + note);
 			noteService.save(note);
-			return new ResponseEntity<>(HttpStatus.OK);	 
+			return new ResponseEntity<>(note, HttpStatus.OK);	 
 		}
 		catch(Exception e) {
 			logger.error(e);

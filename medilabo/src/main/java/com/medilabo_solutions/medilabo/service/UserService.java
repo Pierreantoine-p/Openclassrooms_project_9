@@ -34,7 +34,9 @@ public class UserService {
 	
 	public void save(@Valid User user) {
 		try {
+			System.out.println("user : " + user);
 			userRepository.save(user);
+			
 		}
 		catch(Exception e) {
 			logger.error("Une erreur s'est produite lors de l'ajout : ", e);

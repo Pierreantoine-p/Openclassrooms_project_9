@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule  } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
+import { SourceTextModule } from 'vm';
 
 @Component({
   selector: 'app-patient-form-add',
@@ -14,6 +15,7 @@ import { User } from '../../models/user.model';
 export class PatientFormAddComponent {
 
   createUserForm: FormGroup;
+  user: User | null = null;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.createUserForm = this.fb.group({
@@ -27,10 +29,17 @@ export class PatientFormAddComponent {
   }
 
   onSubmit(): void {
-
       const newUser: User = this.createUserForm.value;
       this.userService.addUser(newUser);
-      this.router.navigate(['/patient-details']);
-
+     this.userService.getUserByName(newUser.firstName,newUser.lastName ).subscribe(
+      user => {
+        //this.user = user;
+        this.userService.user = user;
+        this.router.navigate(['/detail-patient']);
+      },
+      error => {
+        console.error("Error fetching user by name: ", error);
+      }
+    );
   }
 }

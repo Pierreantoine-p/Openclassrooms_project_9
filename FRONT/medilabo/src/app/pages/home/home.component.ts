@@ -13,7 +13,7 @@ export class HomeComponent {
   constructor(private router : Router) {}
 
   redirectToAddPatient(){
-    this.router.navigate(['/form-add-patient']);
+    this.router.navigate(['/patient-form-add']);
 
   }
 }

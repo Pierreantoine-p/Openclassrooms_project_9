@@ -13,12 +13,14 @@ export class StatusService {
   private apiUrl = ''
   private authService = inject(AuthService);
   private http = inject(HttpClient);
-
+  private url = 'http://localhost:5050/';
   constructor(private noteService : NoteService) { }
 
 
 getStatus(firstName : String, lastName : String){
-  const url = `${this.apiUrl}report?firstName=${firstName}/lastName=${lastName}`;
+  //const url = `${this.apiUrl}report?firstName=${firstName}/lastName=${lastName}`;
+  const url = `${this.url}report/${firstName}/${lastName}`;
+
   const headers = this.authService.createAuthHeaders()
   return this.http.get(url, {headers}).pipe(
     catchError(this.handleError)

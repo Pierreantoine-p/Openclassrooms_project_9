@@ -16,20 +16,23 @@ export class NoteService {
   private apiUrl = ''
   private authService = inject(AuthService);
   private http = inject(HttpClient);
+  private url = 'http://localhost:6060/';
 
   constructor(private injector: Injector) { }
 
 
   getNotes(id :number): Observable<Note[]>{
-    const url = `${this.apiUrl}notes?id=${id}`;
+    //const url = `${this.apiUrl}notes?id=${id}`;
+    const url = `${this.url}note/${id}`;
     const headers = this.authService.createAuthHeaders();
     return this.http.get<Note[]>(url, {headers}).pipe(
       catchError(this.handleError)
     )
   }
-  addUser( note : Note) : Observable<Note>{
-    const headers = this.authService.createAuthHeaders()
-    return this.http.post<Note>(`${this.apiUrl}/add`, note, {headers})
+  addNote( note : Note) : void{
+   // const headers = this.authService.createAuthHeaders()
+   // const data = this.http.post<Note>(`${this.url}note/add`, note, {headers})
+   this.http.post<Note>(`${this.url}note/add`, note).subscribe();
   }
 
   private handleError(error: HttpErrorResponse) {

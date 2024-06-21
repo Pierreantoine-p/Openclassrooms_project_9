@@ -20,6 +20,7 @@ public class NoteService {
 
 	public void save(Note body) {
 		try {
+			System.out.println("here : " );
 			 noteRepository.save(body) ;
 		}catch(Exception e) {
 			logger.error("error :" + e);

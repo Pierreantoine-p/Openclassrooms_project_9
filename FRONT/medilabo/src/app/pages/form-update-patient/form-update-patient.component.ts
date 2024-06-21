@@ -40,8 +40,9 @@ export class FormUpdatePatientComponent implements OnInit {
         ...this.user,
         ...this.updateForm.value
       };
-      this.userService.updateUser(updatedUser);
-      this.router.navigate(['/patient-details']);
+      this.userService.updateUser(updatedUser).subscribe();
+      this.userService.user = updatedUser;
+      this.router.navigate(['/detail-patient']);
     }
   }
 }

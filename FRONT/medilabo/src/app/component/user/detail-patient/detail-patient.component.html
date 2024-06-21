@@ -24,37 +24,12 @@
     <span class="value">{{ user?.phoneNumber }}</span>
   </div>
   <div class="detail-item">
-    <button routerlink="/form-update-patient">Mettre à jour les informations</button>
+    <button (click)="redirectToUpdatePatient()">Mise à jour du patient</button>
   </div>
 </div>
-<!--<div>
-  <div>
-    <label>ID:</label>
-    <span>{{ user?.id }}</span>
-  </div>
-  <div>
-    <label>First Name:</label>
-    <input id="firstName" formControlName="firstName" />
-  </div>
-  <div>
-    <label>Last Name:</label>
-    <input id="lastName" formControlName="lastName" />
-  </div>
-  <div>
-    <label>Birth Date:</label>
-    <span>{{ user?.birthDate }}</span>
-  </div>
-  <div>
-    <label>Gender:</label>
-    <span>{{ user?.gender }}</span>
-  </div>
-  <div>
-    <label>Address:</label>
-    <span>{{ user?.address }}</span>
-  </div>
-  <div>
-    <label>Phone Number:</label>
-    <span>{{ user?.phoneNumber }}</span>
-  </div>
-  <button type="submit">Update</button>
-</div>-->
+<div>
+  <app-notes-patient></app-notes-patient>
+</div>
+<div>
+  <app-status-patient></app-status-patient>
+</div>

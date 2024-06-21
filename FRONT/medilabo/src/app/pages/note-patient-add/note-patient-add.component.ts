@@ -29,9 +29,8 @@ export class NotePatientAddComponent {
     this.newNote.note = this.createNoteForm.value.note;
     this.newNote.patid = this.user?.id.toString()|| '';
     this.newNote.patient = this.user?.firstName|| '';
-
-    this.noteService.addUser(this.newNote);
-    this.router.navigate(['/patient-details']);
+    this.noteService.addNote(this.newNote);
+    this.router.navigate(['/detail-patient']);
   }
 
 }
