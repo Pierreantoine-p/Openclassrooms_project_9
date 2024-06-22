@@ -29,10 +29,10 @@ export class NoteService {
       catchError(this.handleError)
     )
   }
-  addNote( note : Note) : void{
+  addNote( note : Note) : Observable<any>{
    // const headers = this.authService.createAuthHeaders()
    // const data = this.http.post<Note>(`${this.url}note/add`, note, {headers})
-   this.http.post<Note>(`${this.url}note/add`, note).subscribe();
+   return this.http.post<Note>(`${this.url}note/add`, note);
   }
 
   private handleError(error: HttpErrorResponse) {

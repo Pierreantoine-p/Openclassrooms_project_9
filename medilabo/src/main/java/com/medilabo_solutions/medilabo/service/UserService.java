@@ -28,13 +28,11 @@ public class UserService {
 
 	public List<User> all (){
 		List<User> users = userRepository.findAll();
-		System.out.println("users " + users);
 		return users;
 	}
 	
 	public void save(@Valid User user) {
 		try {
-			System.out.println("user : " + user);
 			userRepository.save(user);
 			
 		}

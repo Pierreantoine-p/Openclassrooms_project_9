@@ -1,17 +1,8 @@
 services:
-  front:
-    build:
-      context: ./front/medilabo
-      dockerfile: Dockerfile
-    container_name: front
-    ports:
-      - "4200:4200"
-
   gateway:
     build:
-      context: ./gateway/gateway
-      dockerfile: Dockerfile
-    container_name: gateway
+      context: .
+      dockerfile: ./gateway/Dockerfile
     ports:
       - "8080:8080"
     depends_on:
@@ -21,24 +12,44 @@ services:
 
   medilabo:
     build:
-      context: ./medilabo
-      dockerfile: Dockerfile
-    container_name: medilabo
+      context: .
+      dockerfile: ./medilabo/Dockerfile
     ports:
       - "7070:7070"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://medilabo-db:3306/medilabo
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - medilabo-db
+
+  medilabo-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: medilabo
+    ports:
+      - "3306:3306"
 
   note:
     build:
-      context: ./note/note
-      dockerfile: Dockerfile
-    container_name: note
+      context: .
+      dockerfile: ./note/Dockerfile
     ports:
       - "6060:6060"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://note-db:27017/note
+    depends_on:
+      - note-db
+
+  note-db:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
 
   report:
     build:
-      context: ./report/report
-      dockerfile: Dockerfile
-    container_name: report
+      context: .
+      dockerfile: ./report/Dockerfile
     ports:
       - "5050:5050"
