@@ -24,16 +24,15 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/note")
 public class NoteController {
-	
+
 	private static final Logger logger = LogManager.getLogger(NoteController.class);
 
 	@Autowired
 	private NoteService noteService;
-	
+
 	@PostMapping("/add")
 	public ResponseEntity<Note> save (@Valid @RequestBody Note note){
 		try {
-			System.out.println("note : " + note);
 			noteService.save(note);
 			return new ResponseEntity<>(note, HttpStatus.OK);	 
 		}

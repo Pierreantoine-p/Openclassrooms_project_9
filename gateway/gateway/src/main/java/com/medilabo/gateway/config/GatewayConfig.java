@@ -23,23 +23,23 @@ import reactor.core.publisher.Mono;
 @SpringBootApplication
 public class GatewayConfig {
 
-    @CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route("user_route", r->r
 						.path("/user/**")
 						.uri("http://localhost:7070/user"))
-				
+
 				.route("user_note", r->r
 						.path("/note/**")
 						.uri("http://localhost:6060/note"))
-				
+
 				.route("user_report", r->r
 						.path("/report/**")
 						.uri("http://localhost:5050/report"))		
-				 .build();
+				.build();
 	}
-	
+
 
 }

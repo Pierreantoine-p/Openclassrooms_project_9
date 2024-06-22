@@ -11,7 +11,7 @@ import com.medilabo.report.entity.User;
 
 @Service
 public class CalculatedAge {
-	
+
 	public int getAge(User user) {
 		LocalDate currentDate = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

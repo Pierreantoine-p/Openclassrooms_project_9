@@ -30,16 +30,16 @@ public class ReportController {
 
 	@Autowired
 	private ReportService reportService;
-	
+
 	@Autowired
 	private NoteClient noteClient;
 
 	@Autowired
 	private UserClient userClient;
-	
+
 	@Autowired
 	private CalculatedStatus calculatedStatus;
-	
+
 	private User user;
 	private List<Note> notes;
 

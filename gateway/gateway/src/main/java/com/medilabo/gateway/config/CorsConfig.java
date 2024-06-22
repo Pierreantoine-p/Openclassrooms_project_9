@@ -18,24 +18,24 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 public class CorsConfig implements WebFluxConfigurer {
 
 	@Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); // Replace with your allowed origins
-        configuration.setAllowedMethods(Collections.singletonList("*")); // Allow all HTTP methods
-        configuration.setAllowedHeaders(Collections.singletonList("*")); // Allow all headers
-        configuration.setAllowCredentials(true); // Allow credentials (e.g., cookies)
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); // Replace with your allowed origins
+		configuration.setAllowedMethods(Collections.singletonList("*")); // Allow all HTTP methods
+		configuration.setAllowedHeaders(Collections.singletonList("*")); // Allow all headers
+		configuration.setAllowCredentials(true); // Allow credentials (e.g., cookies)
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .allowCredentials(true);
-    }
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+		.allowedOrigins("http://localhost:4200")
+		.allowedMethods("*")
+		.allowedHeaders("*")
+		.allowCredentials(true);
+	}
 }

@@ -32,14 +32,13 @@ public class UserController {
 
 	@GetMapping()
 	public ResponseEntity<List<User>> all (){
-			List<User> users = userService.all();
-			return new ResponseEntity<>(users,HttpStatus.OK);	 
+		List<User> users = userService.all();
+		return new ResponseEntity<>(users,HttpStatus.OK);	 
 	}
-	
+
 	@PostMapping("/add")
 	public ResponseEntity<User> save (@Valid @RequestBody User user){
 		try {
-			System.out.println("user : " + user);
 			userService.save(user);
 			return new ResponseEntity<>(user,HttpStatus.OK);	 
 		}
@@ -60,12 +59,11 @@ public class UserController {
 			throw new RuntimeException("Une erreur est survenue");
 		}
 	}
- 
+
 	@PostMapping("/update")
 	public ResponseEntity<User> updateUser (@Valid @RequestBody User updatedUser){
 		try {
 			User user = userService.updateUser(updatedUser.getFirstName(),updatedUser.getLastName() , updatedUser);
-			System.out.println("user : " + user);
 			return new ResponseEntity<>(user,HttpStatus.OK);
 		}catch(Exception e) {
 			logger.error("Une erreur s'est produite lors de la mise à jour de  l'user : " +  updatedUser.getFirstName(), e);

@@ -12,5 +12,4 @@ public interface UserClient {
 	@GetMapping("/user/{firstName}/{lastName}")
 	User getUserByName(@PathVariable ("firstName") String firstName, @PathVariable ("lastName") String lastName);
 
-	//void create(User user);
 }

@@ -13,14 +13,14 @@ public class CalculatedStatus {
 	private CalculatedAge calculatedAge;
 
 	public Status definedStatus(Integer trigger, User user) {
-		
+
 		Status healthStatus = Status.NONE;
-		
+
 		int age = calculatedAge.getAge(user);
-		
+
 		boolean isAgeMoreThan30 = (age > 30) ;	
 		boolean isAgeLessThan30 = (age < 30) ;
-		
+
 		String gender = user.getGender();		
 
 		if(trigger >= 2 && trigger <= 5 && isAgeMoreThan30) {

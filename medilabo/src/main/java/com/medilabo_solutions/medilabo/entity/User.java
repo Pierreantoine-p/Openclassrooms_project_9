@@ -21,22 +21,22 @@ public class User {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private Integer id;
-	
+
 	@NotBlank(message = "The first  field must be filled in.")
 	@Column(name = "first_name")
 	private String firstName;
-	 
+
 	@NotBlank(message = "The Last Name field must be filled in.")
 	@Column(name = "last_name")
 	private String lastName;
-	 
+
 	@NotBlank(message = "The birthDate field must be filled in.")
 	@Column(name = "birth_date")
 	private String birthDate;
-	 
+
 	@NotBlank(message = "The gender field must be filled in.")
 	private String gender;
-	 
+
 	private String address;
 
 	@Column(name = "phone_number")

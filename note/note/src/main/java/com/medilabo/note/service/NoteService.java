@@ -20,8 +20,7 @@ public class NoteService {
 
 	public void save(Note body) {
 		try {
-			System.out.println("here : " );
-			 noteRepository.save(body) ;
+			noteRepository.save(body) ;
 		}catch(Exception e) {
 			logger.error("error :" + e);
 			logger.error("Une erreur s'est produite lors de la sauvegarde de la note " );
@@ -33,7 +32,7 @@ public class NoteService {
 		try {
 			List<Note> noteList = noteRepository.findByPatid(patId);
 			return noteList;
-			 
+
 		}catch(Exception e) {
 			logger.error("error :" + e);
 			logger.error("Une erreur s'est produite lors de la sauvegarde de la note pour l'id : " + patId);
