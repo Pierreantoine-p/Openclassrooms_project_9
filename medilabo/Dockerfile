@@ -1,5 +1,6 @@
-# Dockerfile for medilabo
-FROM openjdk:11-jre-slim
-VOLUME /tmp
-COPY target/medilabo.jar medilabo.jar
-ENTRYPOINT ["java","-jar","/medilabo.jar"]
+FROM openjdk:17-jdk-alpine
+
+COPY ./target/medilabo-0.0.1-SNAPSHOT.jar medilabo.jar
+
+ENTRYPOINT ["java", "-jar", "medilabo.jar"]
+
