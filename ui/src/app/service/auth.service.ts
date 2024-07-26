@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  token!: String;
 
-  constructor() {}
 
-  createAuthHeaders(): HttpHeaders {
-    const username = 'user';
-    const password = 'password';
-    const base64Credentials = btoa(`${username}:${password}`);
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${base64Credentials}`
-    });
+  setToken(token: String) {
+    this.token = token;
+  }
+
+  getToken(): String  {
+    return this.token;
+  }
+
+  private authUrl = 'http://localhost:8080/auth/login';
+
+  constructor(private http: HttpClient) { }
+
+  login(username: string, password: string): Observable<any> {
+    const body = { username, password };
+    return this.http.post<any>(this.authUrl, body);
   }
 }

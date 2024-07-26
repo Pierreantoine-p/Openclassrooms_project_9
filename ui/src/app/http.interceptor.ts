@@ -1,12 +1,22 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from './service/auth.service';
 
 @Injectable()
-export class BaseUrlInterceptor implements HttpInterceptor {
+export class AuthInterceptor  implements HttpInterceptor {
+
+  constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const apiReq = req.clone({ url: `http://localhost:9090${req.url}` });
-    return next.handle(apiReq);
+    const token = this.authService.getToken();
+    if (token) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`)
+      });
+      return next.handle(cloned);
+    } else {
+      return next.handle(req);
+    }
   }
 }

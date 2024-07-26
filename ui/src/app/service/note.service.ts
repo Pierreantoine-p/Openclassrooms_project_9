@@ -1,9 +1,9 @@
-import { Injectable, Injector, inject } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { HttpClient  , HttpErrorResponse  } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Note } from "../models/note.model";
-import { AuthService } from "./auth.service";
+import { ApiUrlService } from "./api-url.service";
 
 
 
@@ -13,26 +13,22 @@ import { AuthService } from "./auth.service";
 
 export class NoteService {
 
-  private apiUrl = ''
-  private authService = inject(AuthService);
   private http = inject(HttpClient);
-  private url = 'http://localhost:6060/';
+  private apiUrlService = inject(ApiUrlService);
+  private baseUrl: string = 'http://localhost:8080/'
 
-  constructor(private injector: Injector) { }
+
+  constructor() { }
 
 
   getNotes(id :number): Observable<Note[]>{
-    //const url = `${this.apiUrl}notes?id=${id}`;
-    const url = `${this.url}note/${id}`;
-    const headers = this.authService.createAuthHeaders();
-    return this.http.get<Note[]>(url, {headers}).pipe(
+    const url = `${this.baseUrl}note/${id}`;
+    return this.http.get<Note[]>(url).pipe(
       catchError(this.handleError)
     )
   }
   addNote( note : Note) : Observable<any>{
-   // const headers = this.authService.createAuthHeaders()
-   // const data = this.http.post<Note>(`${this.url}note/add`, note, {headers})
-   return this.http.post<Note>(`${this.url}note/add`, note);
+   return this.http.post<Note>(`${this.baseUrl}note/add`, note);
   }
 
   private handleError(error: HttpErrorResponse) {
