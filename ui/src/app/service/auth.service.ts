@@ -6,23 +6,40 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  token!: String;
+  token!: string;
+  private isAuthenticated = false;
 
 
-  setToken(token: String) {
+  setToken(token: string) {
     this.token = token;
   }
 
   getToken(): String  {
-    return this.token;
+    return this.token|| '';;
   }
+
+
 
   private authUrl = 'http://localhost:8080/auth/login';
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<string> {
     const body = { username, password };
+    this.isAuthenticated = true;
     return this.http.post<any>(this.authUrl, body);
   }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
+
+  header(): HttpHeaders{
+    const token = this.getToken()
+  return new HttpHeaders({
+  'Authorization': `Bearer ${token}`,
+  'Content-Type': 'application/json'
+});
+  }
+
 }

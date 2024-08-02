@@ -1,9 +1,10 @@
 import { Injectable, inject } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { HttpClient  , HttpErrorResponse  } from '@angular/common/http';
+import { HttpClient  , HttpErrorResponse, HttpHeaders  } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Note } from "../models/note.model";
 import { ApiUrlService } from "./api-url.service";
+import { AuthService } from "./auth.service";
 
 
 
@@ -18,17 +19,19 @@ export class NoteService {
   private baseUrl: string = 'http://localhost:8080/'
 
 
-  constructor() { }
+  constructor(private authService: AuthService) {}
 
 
   getNotes(id :number): Observable<Note[]>{
     const url = `${this.baseUrl}note/${id}`;
-    return this.http.get<Note[]>(url).pipe(
+    const headers = this.authService.header()
+    return this.http.get<Note[]>(url, { headers }).pipe(
       catchError(this.handleError)
     )
   }
   addNote( note : Note) : Observable<any>{
-   return this.http.post<Note>(`${this.baseUrl}note/add`, note);
+    const headers = this.authService.header()
+   return this.http.post<Note>(`${this.baseUrl}note/add`, note, { headers });
   }
 
   private handleError(error: HttpErrorResponse) {

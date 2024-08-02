@@ -2,7 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: '', loadComponent: () => import('./pages/home/home.component').then(module => module.HomeComponent)
+    path: '', loadComponent: () => import('./pages/auth-form/auth-form.component').then(module => module.AuthFormComponent)
+  },
+  {
+    path: 'home', loadComponent: () => import('./pages/home/home.component').then(module => module.HomeComponent)
   },
   {
     path: 'addPatient', loadComponent: () => import('./pages/patient-form-add/patient-form-add.component').then(module => module.PatientFormAddComponent)

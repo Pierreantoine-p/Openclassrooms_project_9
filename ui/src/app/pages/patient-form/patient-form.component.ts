@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
@@ -12,7 +12,7 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './patient-form.component.html',
   styleUrls: ['./patient-form.component.scss']
 })
-export class PatientFormComponent implements OnInit  {
+export class PatientFormComponent {
   firstName: string = '';
   lastName: string = '';
 
@@ -20,22 +20,9 @@ export class PatientFormComponent implements OnInit  {
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.authService.login('admin', 'password').subscribe(
-      response => {
-        console.log('Token:', response);
-        this.authService.setToken = response;
-      },
-      error => {
-        console.error('Erreur lors de la connexion:', error);
-      }
-    );
-  }
-
   onSubmit() {
     this.userService.getUserByName(this.firstName, this.lastName).subscribe(
       (response: User) => {
-        console.log("response " + response.firstName);
         this.userService.user = response;
         this.router.navigate(['detail-patient']);
       },

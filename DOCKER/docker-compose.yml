@@ -102,6 +102,18 @@ services:
     ports:
       - "8080:8080"
 
+  angular-app:
+    container_name: angular-app
+    image: angular-app:latest
+    restart: always
+    build:
+      context: ../ui
+      dockerfile: Dockerfile
+    networks:
+      - medilaboEnv-network
+    ports:
+      - "4200:80"
+
 networks:
   medilaboEnv-network:
       driver: bridge

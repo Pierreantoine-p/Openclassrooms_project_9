@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from "../models/user.model";
@@ -14,7 +14,8 @@ export class UserService {
   private http = inject(HttpClient);
   private apiUrlService = inject(ApiUrlService);
   private baseUrl: string = 'http://localhost:8080/'
-  constructor() {}
+
+  constructor(private authService: AuthService) {}
 
   setUser(user: User) {
     this.user = user;
@@ -25,20 +26,24 @@ export class UserService {
   }
 
   getUserByName(firstName: string, lastName: string): Observable<User> {
+
     const url = `${this.baseUrl}user/${firstName}/${lastName}`;
-    console.log('Request URL:', url);
-    return this.http.get<User>(url).pipe(
+
+const headers = this.authService.header()
+    return this.http.get<User>(url,  { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
   updateUser(user: User): Observable<User> {
     const url = `${this.baseUrl}user/update`;
-    return this.http.post<User>(url, user);
+    const headers = this.authService.header()
+    return this.http.post<User>(url, user, { headers });
   }
 
   addUser(user: User): void {
-    this.http.post<User>(`${this.baseUrl}user/add`, user).subscribe();
+    const headers = this.authService.header()
+    this.http.post<User>(`${this.baseUrl}user/add`, user, { headers }).subscribe();
   }
 
   private handleError(error: HttpErrorResponse) {
