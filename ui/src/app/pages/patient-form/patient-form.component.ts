@@ -21,15 +21,17 @@ export class PatientFormComponent {
   constructor(private router: Router, private userService: UserService, private authService: AuthService) {}
 
   onSubmit() {
-    this.userService.getUserByName(this.firstName, this.lastName).subscribe(
+    this.userService.getUserByName(this.firstName, this.lastName).subscribe({
+      next:
       (response: User) => {
         this.userService.user = response;
         this.router.navigate(['detail-patient']);
       },
-      (error) => {
-        this.errorMessage = 'User not found';
-        console.error(error);
+      error : (e ) =>{
+        console.log("error "+ e)
       }
+    }
+
     );
   }
 }

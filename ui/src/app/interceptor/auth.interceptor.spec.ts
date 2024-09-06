@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpInterceptorFn } from '@angular/common/http';
 
-import { AuthInterceptor } from './http.interceptor';
+import { authInterceptor } from './auth.interceptor';
 
-describe('httpInterceptor', () => {
+describe('authInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
-    TestBed.runInInjectionContext(() => interceptor(req, next));
+    TestBed.runInInjectionContext(() => authInterceptor(req, next));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -15,4 +15,3 @@ describe('httpInterceptor', () => {
     expect(interceptor).toBeTruthy();
   });
 });
-

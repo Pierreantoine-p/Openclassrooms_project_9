@@ -9,7 +9,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 public class GatewayConfig {
 
     @Bean
-    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+    RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("user_route", r -> r
                         .path("/user/**")

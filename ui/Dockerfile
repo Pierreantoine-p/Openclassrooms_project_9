@@ -1,31 +1,28 @@
-# Étape de build
-FROM node:18 AS build
+# Étape 1 : Utiliser une image node pour builder l'application Angular
+FROM node:18.13 as build
 
-# Définir le répertoire de travail à /app
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier les fichiers package.json et package-lock.json dans le conteneur
-COPY package*.json ./
-
-# Installer les dépendances du projet
+# Copier le fichier package.json et installer les dépendances
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copier tout le reste des fichiers du projet dans le conteneur
+# Copier tout le code de l'application et lancer la compilation
 COPY . .
-
-# Construire l'application Angular pour la production
 RUN npm run build --prod
 
-# Vérifier que les fichiers sont construits et placés dans le bon répertoire
-RUN ls -al /app/dist/medilabo
+# Étape 2 : Utiliser une image nginx pour servir les fichiers statiques
+FROM nginx:alpine
 
-# Étape de production
-FROM httpd:alpine
+# Copier les fichiers compilés de la première étape vers NGINX
+COPY --from=build /app/dist/medilabo/browser /usr/share/nginx/html
 
-# Copier les fichiers construits de l'étape de build vers le répertoire HTML d'Apache
-COPY --from=build /app/dist/medilabo /usr/local/apache2/htdocs/
+# Copier un fichier de configuration NGINX personnalisé (facultatif)
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Exposer le port 80 pour que l'application soit accessible
+# Exposer le port 80
 EXPOSE 80
 
-CMD ["httpd-foreground"]
+# Démarrer NGINX
+CMD ["nginx", "-g", "daemon off;"]

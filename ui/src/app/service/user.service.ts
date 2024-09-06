@@ -27,10 +27,8 @@ export class UserService {
 
   getUserByName(firstName: string, lastName: string): Observable<User> {
 
-    const url = `${this.baseUrl}user/${firstName}/${lastName}`;
-
-const headers = this.authService.header()
-    return this.http.get<User>(url,  { headers }).pipe(
+  const url = `${this.baseUrl}user/${firstName}/${lastName}`;
+    return this.http.get<User>(url).pipe(
       catchError(this.handleError)
     );
   }

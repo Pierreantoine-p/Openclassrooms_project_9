@@ -6,8 +6,6 @@ import com.medilabo.gateway.config.JWTService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,14 +16,13 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthController {
 	
-	@Autowired
-	private JWTService jWTService;
+	private final JWTService jWTService;
 
-	@PostMapping("/login")
+    @PostMapping("/login")
     public Mono<String> login(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
         String password = credentials.get("password");
