@@ -51,15 +51,17 @@ public class SecurityConfig {
 		return http.build();
     }
 	
+	
 	@Bean
     CorsConfigurationSource corsConfiguration() {
         CorsConfiguration corsConfig = new CorsConfiguration();
+        
         corsConfig.applyPermitDefaultValues();
         corsConfig.addAllowedMethod(HttpMethod.GET);
         corsConfig.addAllowedMethod(HttpMethod.POST);
         corsConfig.addAllowedMethod(HttpMethod.PUT);
         corsConfig.addAllowedMethod(HttpMethod.DELETE);
-        corsConfig.setAllowedOrigins(Arrays.asList(FRONTEND_LOCALHOST));
+        corsConfig.setAllowedOrigins(Arrays.asList(FRONTEND_LOCALHOST, "http://192.168.0.26:4200"));
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
