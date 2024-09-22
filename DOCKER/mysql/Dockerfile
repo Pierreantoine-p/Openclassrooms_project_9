@@ -1,8 +1,8 @@
 # Étape de build
 
-FROM mysql:8
+FROM mysql:9.0
 
-ADD scripts/schema.sql /docker-entrypoint-initdb.d/
+ADD init.sql /docker-entrypoint-initdb.d/
 
 RUN chown -R mysql:mysql /docker-entrypoint-initdb.d/
 

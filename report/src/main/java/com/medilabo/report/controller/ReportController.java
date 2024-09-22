@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,11 +43,10 @@ public class ReportController {
 	@GetMapping("/{firstName}/{lastName}")
 	public ResponseEntity<Status> report(@PathVariable String firstName, @PathVariable String lastName, @RequestHeader("Authorization") String token){
 		try {
-
 			User user = userClient.getUserByName(firstName, lastName, token );
 
 			List<Note> notes = noteClient.getNotebyId(user.getId().toString(), token);
-
+						
 			Integer triggers = reportService.calculatedTrigger(notes);
 
 			Status status = calculatedStatus.definedStatus(triggers, user);
@@ -56,7 +54,7 @@ public class ReportController {
 			return new ResponseEntity<>(status, HttpStatus.OK);	 
 
 		}catch(Exception e) {
-			logger.error("Une erreur s'est produite lors de l'ajout : ", e);
+			logger.error("Une erreur s'est produite lors de la récupération du status : ", e);
 			throw new RuntimeException("Une erreur est survenue");
 		}
 	}

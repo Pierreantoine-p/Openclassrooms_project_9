@@ -14,7 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: HGHJ45JID
     volumes:
             - /volume1/database/msa_data:/var/lib/mysql:rw
-            - ./mysql/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql:ro 
+            - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - medilabo-env-network
 
@@ -26,7 +26,7 @@ services:
       context: ./mongo
       dockerfile: Dockerfile
     volumes:
-            - /volume1/database/note-db:/data/db:rw
+            - /volume1/database/note_db:/data/db:rw
     environment:
             MONGO_INITDB_ROOT_USERNAME: admin
             MONGO_INITDB_ROOT_PASSWORD: password

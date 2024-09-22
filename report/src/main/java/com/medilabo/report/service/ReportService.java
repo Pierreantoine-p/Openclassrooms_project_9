@@ -31,13 +31,18 @@ public class ReportService {
 		}
 		return triggers;
 	}
+	
 
 	public int calculatedTrigger(List<Note> notes) throws InterruptedException{
+		
+		if (notes == null || notes.isEmpty()) {
+	        return 1;
+	    }
+		
 		int triggers = 0;
 		Set<String> triggerTerms = readTriggerTerms();
 
 		ExecutorService executor = Executors.newFixedThreadPool(notes.size());
-
 		try { 
 
 			List<Callable<Integer>> tasks = notes.stream()

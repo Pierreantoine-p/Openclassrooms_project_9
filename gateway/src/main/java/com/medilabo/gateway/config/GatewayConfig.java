@@ -19,9 +19,11 @@ public class GatewayConfig {
 						.path("/note/**")
 						.uri("http://note:8082/note"))
 
+				
 				.route("user_report", r -> r
 						.path("/report/**")
 						.uri("http://report:8083/report"))
+
 				.build();
 	}
 }

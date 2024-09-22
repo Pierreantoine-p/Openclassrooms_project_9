@@ -33,7 +33,6 @@ export class PatientFormAddComponent {
       this.userService.addUser(newUser);
      this.userService.getUserByName(newUser.firstName,newUser.lastName ).subscribe(
       user => {
-        //this.user = user;
         this.userService.user = user;
         this.router.navigate(['/detail-patient']);
       },
