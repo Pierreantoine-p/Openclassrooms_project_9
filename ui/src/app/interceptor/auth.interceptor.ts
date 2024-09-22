@@ -8,7 +8,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
   const token = AuthService.getToken();
-  console.log("token2 " + JSON.stringify(token));
 
   const authReq = req.clone({
     setHeaders: {

@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./detail-patient.component.scss']
 })
 export class DetailPatientComponent implements OnInit {
+
   user: User | null = null;
 
   constructor(private userService: UserService, private router: Router,) {}

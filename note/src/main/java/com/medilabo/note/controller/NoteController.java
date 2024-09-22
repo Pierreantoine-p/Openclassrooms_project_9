@@ -20,7 +20,6 @@ import com.medilabo.note.service.NoteService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/note")
 public class NoteController {

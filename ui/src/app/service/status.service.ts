@@ -1,8 +1,7 @@
-import { Injectable, inject } from "@angular/core";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, catchError, throwError } from "rxjs";
-import { ApiUrlService } from "./api-url.service";
 import { AuthService } from "./auth.service";
+import { Injectable, inject } from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ import { AuthService } from "./auth.service";
 export class StatusService {
 
   private http = inject(HttpClient);
-  private apiUrlService = inject(ApiUrlService);
   private baseUrl: string = 'http://localhost:8080/'
 
   constructor(private authService: AuthService) {}
@@ -19,7 +17,7 @@ export class StatusService {
 
 
 getStatus(firstName : String, lastName : String){
-  const url = `${this.baseUrl}report?firstName=${firstName}/lastName=${lastName}`;
+  const url = `${this.baseUrl}report/${firstName}/${lastName}`;
   const headers = this.authService.header()
   return this.http.get(url,  { headers }).pipe(
     catchError(this.handleError)

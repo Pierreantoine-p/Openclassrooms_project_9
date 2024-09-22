@@ -20,7 +20,6 @@ import com.medilabo_solutions.medilabo.service.UserService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -63,6 +62,7 @@ public class UserController {
 	@PostMapping("/update")
 	public ResponseEntity<User> updateUser (@Valid @RequestBody User updatedUser){
 		try {
+			System.out.println("here");
 			User user = userService.updateUser(updatedUser.getFirstName(),updatedUser.getLastName() , updatedUser);
 			return new ResponseEntity<>(user,HttpStatus.OK);
 		}catch(Exception e) {

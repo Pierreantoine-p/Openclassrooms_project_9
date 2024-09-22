@@ -1,10 +1,9 @@
-import { Injectable, inject } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { HttpClient  , HttpErrorResponse, HttpHeaders  } from '@angular/common/http';
+import { HttpClient  , HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Note } from "../models/note.model";
-import { ApiUrlService } from "./api-url.service";
 import { AuthService } from "./auth.service";
+import { Injectable, inject } from "@angular/core";
 
 
 
@@ -15,7 +14,6 @@ import { AuthService } from "./auth.service";
 export class NoteService {
 
   private http = inject(HttpClient);
-  private apiUrlService = inject(ApiUrlService);
   private baseUrl: string = 'http://localhost:8080/'
 
 

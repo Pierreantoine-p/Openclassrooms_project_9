@@ -7,9 +7,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,6 @@ import com.medilabo.report.service.ReportService;
 import com.medilabo.report.service.UserClient;
 
 
-@CrossOrigin
 @RestController
 @RequestMapping("/report")
 public class ReportController {
@@ -40,16 +40,14 @@ public class ReportController {
 	@Autowired
 	private CalculatedStatus calculatedStatus;
 
-	private User user;
-	private List<Note> notes;
 
 	@GetMapping("/{firstName}/{lastName}")
-	public ResponseEntity<Status> report(@PathVariable String firstName, @PathVariable String lastName){
+	public ResponseEntity<Status> report(@PathVariable String firstName, @PathVariable String lastName, @RequestHeader("Authorization") String token){
 		try {
+			
+			User user = userClient.getUserByName(firstName, lastName, token );
 
-			user = userClient.getUserByName(firstName, lastName);
-
-			notes = noteClient.getNotebyId(user.getId().toString());
+			List<Note> notes = noteClient.getNotebyId(user.getId().toString(), token);
 
 			Integer triggers = reportService.calculatedTrigger(notes);
 

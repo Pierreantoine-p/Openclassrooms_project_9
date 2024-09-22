@@ -1,10 +1,10 @@
-import { Injectable, inject } from "@angular/core";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from "../models/user.model";
 import { AuthService } from "./auth.service";
-import { ApiUrlService } from "./api-url.service";
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,6 @@ import { ApiUrlService } from "./api-url.service";
 export class UserService {
   user: User | null = null;
   private http = inject(HttpClient);
-  private apiUrlService = inject(ApiUrlService);
   private baseUrl: string = 'http://localhost:8080/'
 
   constructor(private authService: AuthService) {}

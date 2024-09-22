@@ -70,8 +70,7 @@
               "buildTarget": "medilabo:build:production"
             },
             "development": {
-              "buildTarget": "medilabo:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "buildTarget": "medilabo:build:development"
             }
           },
           "defaultConfiguration": "development"

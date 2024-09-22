@@ -19,11 +19,9 @@ export class AuthFormComponent {
 
   constructor(private router: Router, private authService: AuthService) {}
 
-
   login() {
     this.authService.login(this.username, this.password).subscribe(
       (response: any) => {
-        console.log("response " + JSON.stringify(response));
         this.authService.setToken(response.token);
         this.router.navigate(['/home']);
       },

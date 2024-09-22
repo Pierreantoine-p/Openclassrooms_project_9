@@ -13,15 +13,15 @@ public class GatewayConfig {
         return builder.routes()
                 .route("user_route", r -> r
                         .path("/user/**")
-                        .uri("http://localhost:8081/user/"))
+                        .uri("http://medilabo:8081/user"))
 
                 .route("user_note", r -> r
                         .path("/note/**")
-                        .uri("http://localhost:8082/note/"))
+                        .uri("http://note:8082/note"))
 
                 .route("user_report", r -> r
                         .path("/report/**")
-                        .uri("http://localhost:8083/report"))
+                        .uri("http://report:8083/report"))
                 .build();
     }
 }

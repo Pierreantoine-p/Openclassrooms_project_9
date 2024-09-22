@@ -49,7 +49,8 @@ services:
       DATASOURCE_USERNAME: admin
       DATASOURCE_PASSWORD: password
       LOG_LEVEL: info
-   
+    ports:
+      - "8081:8081"
 
   note:
     container_name: note
@@ -69,7 +70,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_AUTO_INDEX_CREATION: true
       LOG_LEVEL: info
-   
+    ports:
+      - "8082:8082"
 
   report:
     container_name: report
@@ -83,7 +85,8 @@ services:
       - medilabo
     networks:
       - medilabo-env-network
-    
+    ports:
+    - "8083:8083"
 
   gateway:
     container_name: gateway
