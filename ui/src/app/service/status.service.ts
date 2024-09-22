@@ -12,26 +12,26 @@ export class StatusService {
   private http = inject(HttpClient);
   private baseUrl: string = 'http://localhost:8080/'
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
 
 
-getStatus(firstName : String, lastName : String){
-  const url = `${this.baseUrl}report/${firstName}/${lastName}`;
-  const headers = this.authService.header()
-  return this.http.get(url,  { headers }).pipe(
-    catchError(this.handleError)
+  getStatus(firstName: String, lastName: String) {
+    const url = `${this.baseUrl}report/${firstName}/${lastName}`;
+    const headers = this.authService.header()
+    return this.http.get(url, { headers }).pipe(
+      catchError(this.handleError)
 
-  )
-}
-
-private handleError(error: HttpErrorResponse): Observable<any> {
-  let errorMessage = 'Unknown error occurred';
-  if (error.error instanceof ErrorEvent) {
-    errorMessage = `Error: ${error.error.message}`;
-  } else {
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    )
   }
-  return throwError(errorMessage);
-}
+
+  private handleError(error: HttpErrorResponse): Observable<any> {
+    let errorMessage = 'Unknown error occurred';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
+  }
 }

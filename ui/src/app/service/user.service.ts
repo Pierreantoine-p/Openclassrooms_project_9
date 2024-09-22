@@ -14,7 +14,7 @@ export class UserService {
   private http = inject(HttpClient);
   private baseUrl: string = 'http://localhost:8080/'
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   setUser(user: User) {
     this.user = user;
@@ -26,7 +26,7 @@ export class UserService {
 
   getUserByName(firstName: string, lastName: string): Observable<User> {
 
-  const url = `${this.baseUrl}user/${firstName}/${lastName}`;
+    const url = `${this.baseUrl}user/${firstName}/${lastName}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError)
     );

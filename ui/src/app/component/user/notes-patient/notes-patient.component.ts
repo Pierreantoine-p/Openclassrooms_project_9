@@ -9,22 +9,21 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-notes-patient',
   standalone: true,
-  imports: [CommonModule ],
+  imports: [CommonModule],
   templateUrl: './notes-patient.component.html',
   styleUrl: './notes-patient.component.scss'
 })
-export class NotesPatientComponent implements OnInit{
+export class NotesPatientComponent implements OnInit {
   notes: Note[] = [];
   userId: number | null = null;
 
-  constructor(private router : Router , private userService: UserService, private noteService: NoteService) {}
+  constructor(private router: Router, private userService: UserService, private noteService: NoteService) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUser()?.id ?? null;
-    console.log("userId " + this.userId)
-        if(this.userId){
+    if (this.userId) {
       this.noteService.getNotes(this.userId).subscribe(
-        (data : Note[]) => {
+        (data: Note[]) => {
           this.notes = data;
         },
         (error) => {

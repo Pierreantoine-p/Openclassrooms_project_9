@@ -1,5 +1,5 @@
 import { Observable, throwError } from "rxjs";
-import { HttpClient  , HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Note } from "../models/note.model";
 import { AuthService } from "./auth.service";
@@ -17,19 +17,19 @@ export class NoteService {
   private baseUrl: string = 'http://localhost:8080/'
 
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
 
-  getNotes(id :number): Observable<Note[]>{
+  getNotes(id: number): Observable<Note[]> {
     const url = `${this.baseUrl}note/${id}`;
     const headers = this.authService.header()
     return this.http.get<Note[]>(url, { headers }).pipe(
       catchError(this.handleError)
     )
   }
-  addNote( note : Note) : Observable<any>{
+  addNote(note: Note): Observable<any> {
     const headers = this.authService.header()
-   return this.http.post<Note>(`${this.baseUrl}note/add`, note, { headers });
+    return this.http.post<Note>(`${this.baseUrl}note/add`, note, { headers });
   }
 
   private handleError(error: HttpErrorResponse) {

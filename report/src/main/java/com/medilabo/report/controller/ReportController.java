@@ -44,7 +44,7 @@ public class ReportController {
 	@GetMapping("/{firstName}/{lastName}")
 	public ResponseEntity<Status> report(@PathVariable String firstName, @PathVariable String lastName, @RequestHeader("Authorization") String token){
 		try {
-			
+
 			User user = userClient.getUserByName(firstName, lastName, token );
 
 			List<Note> notes = noteClient.getNotebyId(user.getId().toString(), token);

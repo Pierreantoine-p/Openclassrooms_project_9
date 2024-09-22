@@ -15,8 +15,8 @@ export class AuthService {
     AuthService.token = token;
   }
 
-  static getToken(): String  {
-    return this.token|| '';
+  static getToken(): String {
+    return this.token || '';
   }
 
   private authUrl = 'http://localhost:8080/auth/login';
@@ -29,16 +29,16 @@ export class AuthService {
   }
 
 
-  header(): HttpHeaders{
+  header(): HttpHeaders {
     const token = AuthService.getToken()
 
-  const result =  new HttpHeaders({
-  'Authorization': `Bearer ${token}`,
-  'Content-Type': 'application/json'
+    const result = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
 
-});
+    });
 
-return result;
+    return result;
   }
 
 }

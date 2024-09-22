@@ -33,54 +33,54 @@ import lombok.RequiredArgsConstructor;
 @EnableReactiveMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-	
+
 	private static final String FRONTEND_LOCALHOST = "http://localhost:4200";
 	private String jwtKey = "IshRk5YrLraSJp4+2dNZIEVf6Ue6Fp0yZzLviHno+jQ=";
 
 	@Bean
-    SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
+	SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
 
 		http
-			.csrf(CsrfSpec::disable)
-			.authorizeExchange(exchanges -> exchanges
+		.csrf(CsrfSpec::disable)
+		.authorizeExchange(exchanges -> exchanges
 				.pathMatchers("/auth/login").permitAll()
-			    .anyExchange().authenticated()
-			)
-			.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
-			
-		return http.build();
-    }
-	
-	
-	@Bean
-    CorsConfigurationSource corsConfiguration() {
-        CorsConfiguration corsConfig = new CorsConfiguration();
-        
-        corsConfig.applyPermitDefaultValues();
-        corsConfig.addAllowedMethod(HttpMethod.GET);
-        corsConfig.addAllowedMethod(HttpMethod.POST);
-        corsConfig.addAllowedMethod(HttpMethod.PUT);
-        corsConfig.addAllowedMethod(HttpMethod.DELETE);
-        corsConfig.setAllowedOrigins(Arrays.asList(FRONTEND_LOCALHOST, "http://192.168.0.26:4200"));
+				.anyExchange().authenticated()
+				)
+		.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig);
-        return source;
-    }
-    
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    
-    @Bean
-    ReactiveJwtDecoder jwtDecoder() {
+		return http.build();
+	}
+
+
+	@Bean
+	CorsConfigurationSource corsConfiguration() {
+		CorsConfiguration corsConfig = new CorsConfiguration();
+
+		corsConfig.applyPermitDefaultValues();
+		corsConfig.addAllowedMethod(HttpMethod.GET);
+		corsConfig.addAllowedMethod(HttpMethod.POST);
+		corsConfig.addAllowedMethod(HttpMethod.PUT);
+		corsConfig.addAllowedMethod(HttpMethod.DELETE);
+		corsConfig.setAllowedOrigins(Arrays.asList(FRONTEND_LOCALHOST, "http://192.168.0.26:4200"));
+
+		UrlBasedCorsConfigurationSource source =
+				new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfig);
+		return source;
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	ReactiveJwtDecoder jwtDecoder() {
 		SecretKeySpec secretKey = new SecretKeySpec(this.jwtKey.getBytes(), 0, this.jwtKey.getBytes().length,"RSA");
 		return NimbusReactiveJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS256).build();
 	}
-    
-    @Bean
+
+	@Bean
 	JwtEncoder jwtEncoder() {
 		return new NimbusJwtEncoder(new ImmutableSecret<>(this.jwtKey.getBytes()));
 	}
