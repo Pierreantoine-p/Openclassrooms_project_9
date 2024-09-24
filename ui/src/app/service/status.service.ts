@@ -16,8 +16,8 @@ export class StatusService {
 
 
 
-  getStatus(firstName: String, lastName: String) {
-    const url = `${this.baseUrl}report/${firstName}/${lastName}`;
+  getStatus(id: number) {
+    const url = `${this.baseUrl}report/${id}`;
     const headers = this.authService.header()
     return this.http.get(url, { headers }).pipe(
       catchError(this.handleError)

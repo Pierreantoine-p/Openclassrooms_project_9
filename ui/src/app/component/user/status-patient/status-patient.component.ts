@@ -12,19 +12,18 @@ import { StatusService } from '../../../service/status.service';
 export class StatusPatientComponent implements OnInit{
 
   status: string = 'NONE';
-  firstName: string = '';
-  lastName: string = '';
+  id: number = 0;
   errorMessage: string = '';
 
 
   constructor(private userService: UserService, private statusService: StatusService) {}
 
   ngOnInit(): void {
-    this.firstName = this.userService.getUser()?.firstName ?? '';
-    this.lastName = this.userService.getUser()?.lastName ?? '';
+    this.id = this.userService.getUser()?.id ?? 0;
 
-    if (this.firstName && this.lastName) {
-       this.statusService.getStatus(this.firstName, this.lastName).subscribe(
+
+    if (this.id) {
+       this.statusService.getStatus(this.id).subscribe(
         (response : string) => {
           this.status = response
         },

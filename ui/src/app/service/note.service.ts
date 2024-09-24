@@ -29,7 +29,7 @@ export class NoteService {
   }
   addNote(note: Note): Observable<any> {
     const headers = this.authService.header()
-    return this.http.post<Note>(`${this.baseUrl}note/add`, note, { headers });
+    return this.http.post<Note>(`${this.baseUrl}note`, note, { headers });
   }
 
   private handleError(error: HttpErrorResponse) {

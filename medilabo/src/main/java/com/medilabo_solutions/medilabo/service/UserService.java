@@ -51,18 +51,30 @@ public class UserService {
 			throw new RuntimeException("Une erreur est survenue");
 		}
 	}
-
-	public User updateUser(String lastName, String firstName, User updatedUser) {
+	
+	public User getUserById(Integer id) {
 		try {
-			User actualUser = userRepository.findByFirstNameAndLastName(firstName, lastName);
-			if (actualUser == null) {
-				throw new RuntimeException("User not found with firstName: " + firstName + " and lastName: " + lastName);
-			}
-			modelMapper.map(updatedUser, actualUser);
-			userRepository.save(actualUser);
+			User user = userRepository.findById(id.toString())
+					 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'ID : " + id));
+
+			return user;
+		}
+		catch(Exception e) {
+			logger.error("Utilisateur non trouvé avec l'ID " + id, e);
+			throw new RuntimeException("Une erreur est survenue");
+		}
+	}
+	
+	
+	public User updateUser(User updatedUser) {
+		try {
+			User actualUser = userRepository.findById(updatedUser.getId().toString())
+			 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé avec l'ID : " + updatedUser.getId()));
+		
+			userRepository.save(updatedUser);
 			return actualUser;
 		}catch(Exception e) {
-			logger.error("Une erreur s'est produite lors de la mise à jour de  l'user : " +  lastName + "," + firstName, e);
+			logger.error("Une erreur s'est produite lors de la mise à jour de  l'user : " +  updatedUser.getFirstName() + "," + updatedUser.getLastName(), e);
 			throw new RuntimeException("Une erreur est survenue");
 		}
 	}

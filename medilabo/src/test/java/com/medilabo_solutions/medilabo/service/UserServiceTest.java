@@ -70,7 +70,7 @@ public class UserServiceTest {
 		updateUser.setAddress("address_2");
 		updateUser.setBirthDate("01/01/0001");
 		
-		User result = userService.updateUser("a", "a", updateUser);
+		User result = userService.updateUser(updateUser);
 
 		assertEquals("1111111111" , result.getPhoneNumber() );
 		assertEquals("address_2" , result.getAddress() );

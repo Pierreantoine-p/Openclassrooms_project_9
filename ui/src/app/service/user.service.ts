@@ -25,7 +25,6 @@ export class UserService {
   }
 
   getUserByName(firstName: string, lastName: string): Observable<User> {
-
     const url = `${this.baseUrl}user/${firstName}/${lastName}`;
     return this.http.get<User>(url).pipe(
       catchError(this.handleError)
@@ -33,14 +32,14 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    const url = `${this.baseUrl}user/update`;
+    const url = `${this.baseUrl}user`;
     const headers = this.authService.header()
     return this.http.post<User>(url, user, { headers });
   }
 
   addUser(user: User): void {
     const headers = this.authService.header()
-    this.http.post<User>(`${this.baseUrl}user/add`, user, { headers }).subscribe();
+    this.http.post<User>(`${this.baseUrl}user`, user, { headers }).subscribe();
   }
 
   private handleError(error: HttpErrorResponse) {

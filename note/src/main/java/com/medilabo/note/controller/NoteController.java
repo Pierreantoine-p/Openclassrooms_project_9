@@ -28,7 +28,7 @@ public class NoteController {
 	@Autowired
 	private NoteService noteService;
 
-	@PostMapping("/add")
+	@PostMapping("")
 	public ResponseEntity<Note> save (@Valid @RequestBody Note note){
 		try {
 			noteService.save(note);

@@ -15,11 +15,12 @@ public class GatewayConfig {
 						.path("/user/**")
 						.uri("http://medilabo:8081/user"))
 
+
 				.route("user_note", r -> r
 						.path("/note/**")
 						.uri("http://note:8082/note"))
 
-				
+
 				.route("user_report", r -> r
 						.path("/report/**")
 						.uri("http://report:8083/report"))

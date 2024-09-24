@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.medilabo.report.entity.User;
 
 @FeignClient(name = "user-client",url = "http://gateway:8080")
+
 public interface UserClient {
 
-	@GetMapping("/user/{firstName}/{lastName}")
-	User getUserByName(@PathVariable ("firstName") String firstName, @PathVariable ("lastName") String lastName,  @RequestHeader("Authorization") String token);
+	@GetMapping("/user/{id}")
+	User getUserById(@PathVariable ("id") Integer id,  @RequestHeader("Authorization") String token);
 
 }

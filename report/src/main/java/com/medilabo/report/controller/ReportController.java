@@ -40,10 +40,10 @@ public class ReportController {
 	private CalculatedStatus calculatedStatus;
 
 
-	@GetMapping("/{firstName}/{lastName}")
-	public ResponseEntity<Status> report(@PathVariable String firstName, @PathVariable String lastName, @RequestHeader("Authorization") String token){
+	@GetMapping("/{id}")
+	public ResponseEntity<Status> report(@PathVariable Integer id, @RequestHeader("Authorization") String token){
 		try {
-			User user = userClient.getUserByName(firstName, lastName, token );
+			User user = userClient.getUserById(id, token );
 
 			List<Note> notes = noteClient.getNotebyId(user.getId().toString(), token);
 						

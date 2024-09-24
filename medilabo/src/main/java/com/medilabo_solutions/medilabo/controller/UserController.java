@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class UserController {
 		return new ResponseEntity<>(users,HttpStatus.OK);	 
 	}
 
-	@PostMapping("/add")
+	@PostMapping("")
 	public ResponseEntity<User> save (@Valid @RequestBody User user){
 		try {
 			userService.save(user);
@@ -57,11 +58,23 @@ public class UserController {
 			throw new RuntimeException("Une erreur est survenue");
 		}
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<User> getUserById (@PathVariable Integer id ){
+		try {
+			User user = userService.getUserById (id);
+			return new ResponseEntity<>(user ,HttpStatus.OK);	 
+		}
+		catch(Exception e) {
+			logger.error("Une erreur s'est produite avec l'id : " + id , e);
+			throw new RuntimeException("Une erreur est survenue");
+		}
+	}
 
-	@PostMapping("/update")
+	@PutMapping("")
 	public ResponseEntity<User> updateUser (@Valid @RequestBody User updatedUser){
 		try {
-			User user = userService.updateUser(updatedUser.getFirstName(),updatedUser.getLastName() , updatedUser);
+			User user = userService.updateUser(updatedUser);
 			return new ResponseEntity<>(user,HttpStatus.OK);
 		}catch(Exception e) {
 			logger.error("Une erreur s'est produite lors de la mise à jour de  l'user : " +  updatedUser.getFirstName(), e);
